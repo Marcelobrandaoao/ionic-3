@@ -7,43 +7,44 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Feed</ion-title>
+    <ion-title >Feed</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-  <ion-card>
+<ion-content padding>                         <!--enquanto tiver itens na minha lista filmes, ele vai repetir o ion-card pea quantidades de tens que tiverem na "lista_filmes"-->
+  
+  <ion-card *ngFor="let filme of lista_filmes">   <!--se repetir pela quantidades de itens a lista (Diretivas angular)-->
     <ion-item>
       <ion-avatar item-start>
-        <img src="../assets/images/feedHoppe.jpg">
+        <img src="assets/images/feedHoppe.jpg">
       </ion-avatar>  
-      <h2 class = "feed_title"> {{ nome_usuario }} </h2>
-      <p class="feed_date">Setembro de 1949 Alemanha</p>
+      <h2 class="feed_title">{{ filme.original_title }}</h2>
+      <p class="feed_date">{{ filme.release_date }}</p>
       </ion-item>
   
-    <img src="../assets/images/feedGadsden.png">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + filme.backdrop_path">  <!--bind na propriedade src, que é pra poder usar a variaves-->
   
     <ion-card-content>
-      <p>Hans-Hermann Hoppe é um filósofo e economista libertário alemão-americano da escola austríaca, de tradição anarcocapitalista. É professor emérito de economia na Universidade de Nevada, Las Vegas, tendo se aposentado em 2008. Obteve seu PhD na Universidade de Frankfurt Johann Wolfgang Goethe, na Alemanha.</p>
+      <p>{{ filme.overview }}</p>
     </ion-card-content>
   
     <ion-row>
       <ion-col>
         <button ion-button icon-start clear small>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Likes</div>
+          <div>{{objeto_feed.qntd_likes}}</div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-start clear small>
           <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
+          <div>{{objeto_feed.qntd_comments}}</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          11h ago
+          {{objeto_feed.time_comment}}
         </ion-note>
       </ion-col>
     </ion-row>
